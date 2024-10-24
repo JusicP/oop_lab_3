@@ -1,4 +1,4 @@
-package com.lab.weather.ui.gallery
+package com.lab.weather.main.ui.gallery
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

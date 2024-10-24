@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+            app:title="@string/basic_preferences"
+            app:summary="Sample preferences using basic attributes"
+            app:fragment="com.lab.weather.settings.SettingsActivity$BasicPreferencesFragment"/>
+
+    <Preference
+            app:title="@string/widgets"
+            app:summary="Sample preferences with different widgets"
+            app:fragment="com.lab.weather.settings.SettingsActivity$WidgetPreferencesFragment"/>
+
+    <Preference
+            app:title="@string/dialogs"
+            app:summary="Sample preferences that launch dialogs"
+            app:fragment="com.lab.weather.settings.SettingsActivity$DialogPreferencesFragment"/>
+
+    <Preference
+            app:title="@string/advanced_attributes"
+            app:summary="Sample preferences with advanced attributes"
+            app:fragment="com.lab.weather.settings.SettingsActivity$AdvancedPreferencesFragment"/>
+
+</PreferenceScreen>
