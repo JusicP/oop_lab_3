@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Preference
-            app:title="@string/basic_preferences"
-            app:summary="Sample preferences using basic attributes"
+            app:title="@string/title_api_preferences"
+            app:summary="@string/summary_api_preferences"
             app:fragment="com.lab.weather.settings.SettingsActivity$BasicPreferencesFragment"/>
 
     <Preference
-            app:title="@string/widgets"
-            app:summary="Sample preferences with different widgets"
-            app:fragment="com.lab.weather.settings.SettingsActivity$WidgetPreferencesFragment"/>
+            app:title="@string/title_units_preferences"
+            app:summary="@string/summary_units_preferences"
+            app:fragment="com.lab.weather.settings.SettingsActivity$UnitsPreferencesFragment"/>
 
     <Preference
             app:title="@string/dialogs"

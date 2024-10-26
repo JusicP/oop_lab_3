@@ -76,36 +76,24 @@ class SettingsActivity : AppCompatActivity(),
         }
     }
 
-    /**
-     * A preference fragment that demonstrates commonly used preference attributes.
-     */
     class BasicPreferencesFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.basic_preferences, rootKey)
+            setPreferencesFromResource(R.xml.api_preferences, rootKey)
         }
     }
 
-    /**
-     * A preference fragment that demonstrates preferences which contain dynamic widgets.
-     */
-    class WidgetPreferencesFragment : PreferenceFragmentCompat() {
+    class UnitsPreferencesFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.widgets, rootKey)
+            setPreferencesFromResource(R.xml.units, rootKey)
         }
     }
 
-    /**
-     * A preference fragment that demonstrates preferences that launch a dialog when tapped.
-     */
     class DialogPreferencesFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.dialogs, rootKey)
         }
     }
 
-    /**
-     * A preference fragment that demonstrates more advanced attributes and functionality.
-     */
     class AdvancedPreferencesFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.advanced, rootKey)

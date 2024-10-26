@@ -1,5 +1,6 @@
 package com.lab.weather.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -13,14 +14,18 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.lab.weather.R
 import com.lab.weather.databinding.ActivityMainBinding
 import com.lab.weather.settings.SettingsActivity
+import com.lab.weather.shared.AppPreferencesImpl
+import com.lab.weather.viewmodel.WeatherViewModel
+import com.lab.weather.viewmodel.WeatherViewModelFactory
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var weatherViewModel: WeatherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +35,27 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        binding.appBarMain.fabAddWeather.setOnClickListener { view ->
+            Snackbar.make(view, "TODO: add weather fragment................", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
-                .setAnchorView(R.id.fab).show()
+                .setAnchorView(R.id.fabAddWeather).show()
         }
+
+        weatherViewModel = ViewModelProvider(
+            this,
+            WeatherViewModelFactory(AppPreferencesImpl)
+        ).get(WeatherViewModel::class.java)
+
+        weatherViewModel.errorMessage.observe(this,{
+            Snackbar.make(binding.root, "Got error message: %s".format(it), Snackbar.LENGTH_LONG)
+                .setAction("Action", null)
+                .setAnchorView(R.id.fabAddWeather).show()
+        })
+
+        binding.appBarMain.fabRefresh.setOnClickListener { _ ->
+            weatherViewModel.getWeather()
+        }
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -47,6 +68,9 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        // setup preferences
+        AppPreferencesImpl.setup(getSharedPreferences("com.lab.weather_preferences", Context.MODE_PRIVATE))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

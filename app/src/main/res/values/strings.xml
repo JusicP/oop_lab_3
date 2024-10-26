@@ -14,6 +14,23 @@
     <!--New strings-->
     <string name="add_weather">Add weather</string>
     <string name="action_about">About app</string>
+    <string name="refresh">Refresh</string>
+    <string name="title_api_preferences">Weather API preferences</string>
+    <string name="summary_api_preferences">Choose API you like, change API key</string>
+
+    <string name="title_api_preference">API</string>
+    <string name="title_openweathermap_api_key">OpenWeatherMap API key</string>
+    <string name="title_weatherapi_api_key">WeatherAPI key</string>
+
+    <string name="title_units_preferences">Units of measurement</string>
+    <string name="summary_units_preferences">Select the units of measurement you need for temperature, wind speed, etc.</string>
+
+    <string name="title_system_units_preferences">System of units (for OpenWeatherMap API, options below don\'t affect for this API)</string>
+    <string name="title_system_units_preference">System of units</string>
+    <string name="title_other_units_preferences">Other unit options</string>
+
+    <string name="title_temperature_unit_preference">Temperature unit</string>
+    <string name="title_wind_speed_unit_preference">Wind speed unit</string>
 
     <!--TO REMOVE START!!!-->
     <!--App title-->
