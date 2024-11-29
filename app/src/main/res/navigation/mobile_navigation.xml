@@ -12,14 +12,20 @@
             tools:layout="@layout/fragment_home"/>
 
     <fragment
-            android:id="@+id/nav_gallery"
-            android:name="com.lab.weather.main.ui.gallery.GalleryFragment"
-            android:label="@string/menu_gallery"
-            tools:layout="@layout/fragment_gallery"/>
+            android:id="@+id/nav_cities"
+            android:name="com.lab.weather.main.ui.cities.CitiesFragment"
+            android:label="@string/menu_cities"
+            tools:layout="@layout/fragment_cities"/>
 
     <fragment
-            android:id="@+id/nav_slideshow"
-            android:name="com.lab.weather.main.ui.slideshow.SlideshowFragment"
-            android:label="@string/menu_slideshow"
-            tools:layout="@layout/fragment_slideshow"/>
+            android:id="@+id/nav_ctiy_preview"
+            android:name="com.lab.weather.main.ui.cities.CityPreviewFragment"
+            tools:layout="@layout/fragment_city_preview"/>
+
+    <fragment
+            android:id="@+id/nav_search"
+            android:name="com.lab.weather.main.ui.search.SearchFragment"
+            android:label="Search"
+            tools:layout="@layout/fragment_search"/>
+
 </navigation>

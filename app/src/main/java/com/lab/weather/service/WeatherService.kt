@@ -1,5 +1,6 @@
 package com.lab.weather.service
 
+import com.lab.weather.models.Geocoding
 import com.lab.weather.models.Weather
 import com.lab.weather.service.api.WeatherRepositoryFactory
 import com.lab.weather.shared.AppPreferences
@@ -9,6 +10,12 @@ class WeatherService(private val preferences: AppPreferences) {
     suspend fun getCurrentWeather(location: String): Weather {
         val repo = WeatherRepositoryFactory.createWeatherRepository(preferences.weatherRepositoryType);
 
-        return repo.getCurrentWeather(preferences.getCurrentApiKey(), preferences.locale, location, preferences.unitsOfMeasurement.toString())
+        return repo.getCurrentWeather(preferences.getCurrentApiKey(), preferences.locale, location, preferences.unitsOfMeasurement)
+    }
+
+    suspend fun getGeocoding(location: String): List<Geocoding> {
+        val repo = WeatherRepositoryFactory.createWeatherRepository(preferences.weatherRepositoryType);
+
+        return repo.getGeocoding(preferences.getCurrentApiKey(), preferences.locale, location)
     }
 }

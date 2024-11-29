@@ -1,6 +1,7 @@
-package com.lab.weather.settings
+package com.lab.weather.main.settings
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -13,6 +14,8 @@ class SettingsActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
         setContentView(R.layout.activity_settings)
         if (savedInstanceState == null) {
             supportFragmentManager
@@ -85,18 +88,6 @@ class SettingsActivity : AppCompatActivity(),
     class UnitsPreferencesFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.units, rootKey)
-        }
-    }
-
-    class DialogPreferencesFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.dialogs, rootKey)
-        }
-    }
-
-    class AdvancedPreferencesFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.advanced, rootKey)
         }
     }
 }

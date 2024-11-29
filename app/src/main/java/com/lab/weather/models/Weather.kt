@@ -1,7 +1,12 @@
 package com.lab.weather.models
 
+import com.lab.weather.shared.UnitsOfMeasurement
+import com.lab.weather.shared.WeatherRepositoryType
+
 // current weather state
 data class Weather (
+    var api: WeatherRepositoryType,
+    var units: UnitsOfMeasurement,
     var city: String? = null,
     var description: String? = null,
     var timezone: Int? = null,

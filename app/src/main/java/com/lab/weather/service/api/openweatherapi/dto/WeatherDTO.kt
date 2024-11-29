@@ -2,9 +2,11 @@ package com.lab.weather.service.api.openweatherapi.dto
 
 import com.google.gson.annotations.SerializedName
 import com.lab.weather.models.Weather
+import com.lab.weather.shared.UnitsOfMeasurement
+import com.lab.weather.shared.WeatherRepositoryType
 
-data class WeatherDtoOpenWeatherApi(
-    @SerializedName("weather") var weather: WeatherGeneralStatus? = null,
+data class WeatherDtoOpenWeatherMap(
+    @SerializedName("weather") var weather: List<WeatherGeneralStatus>? = null,
     @SerializedName("main") var main: Main? = null,
     @SerializedName("sys") var sys: Sys? = null,
     @SerializedName("wind") var wind: Wind? = null,
@@ -14,11 +16,12 @@ data class WeatherDtoOpenWeatherApi(
     @SerializedName("dt") var timestamp: Int? = null,
     @SerializedName("name") var name: String? = null
 )
-fun WeatherDtoOpenWeatherApi.asDomainModel(): Weather {
+fun WeatherDtoOpenWeatherMap.asDomainModel(units: UnitsOfMeasurement): Weather {
     return Weather(
+        api = WeatherRepositoryType.OPEN_WEATHER_API,
+        units = units,
         city = name,
-        description = weather!!.description,
-        timezone = timezone,
+        description = weather!![0].description,
         dateTime = timestamp,
         temperature = main!!.temp,
         pressure = main!!.pressure,

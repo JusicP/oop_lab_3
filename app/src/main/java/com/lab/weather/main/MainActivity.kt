@@ -5,6 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -17,10 +20,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.lab.weather.R
 import com.lab.weather.databinding.ActivityMainBinding
-import com.lab.weather.settings.SettingsActivity
+import com.lab.weather.main.settings.SettingsActivity
 import com.lab.weather.shared.AppPreferencesImpl
-import com.lab.weather.viewmodel.WeatherViewModel
-import com.lab.weather.viewmodel.WeatherViewModelFactory
+import com.lab.weather.main.ui.WeatherViewModel
+import com.lab.weather.main.ui.WeatherViewModelFactory
+import com.lab.weather.service.WeatherService
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -28,32 +32,28 @@ class MainActivity : AppCompatActivity() {
     private lateinit var weatherViewModel: WeatherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+
+        // setup preferences
+        AppPreferencesImpl.setup(getSharedPreferences("com.lab.weather_preferences", Context.MODE_PRIVATE))
+
+        weatherViewModel = ViewModelProvider(
+            this,
+            WeatherViewModelFactory(WeatherService(AppPreferencesImpl)),
+        ).get(WeatherViewModel::class.java)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        binding.appBarMain.fabAddWeather.setOnClickListener { view ->
-            Snackbar.make(view, "TODO: add weather fragment................", Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fabAddWeather).show()
+        binding.appBarMain.fabRefresh.setOnClickListener { view ->
+            onRefresh(view)
         }
 
-        weatherViewModel = ViewModelProvider(
-            this,
-            WeatherViewModelFactory(AppPreferencesImpl)
-        ).get(WeatherViewModel::class.java)
-
-        weatherViewModel.errorMessage.observe(this,{
-            Snackbar.make(binding.root, "Got error message: %s".format(it), Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .setAnchorView(R.id.fabAddWeather).show()
-        })
-
-        binding.appBarMain.fabRefresh.setOnClickListener { _ ->
-            weatherViewModel.getWeather()
+        binding.appBarMain.fabFavourite.setOnClickListener { view ->
+            onMakeCityFavourite(view)
         }
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -63,14 +63,11 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_cities
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        // setup preferences
-        AppPreferencesImpl.setup(getSharedPreferences("com.lab.weather_preferences", Context.MODE_PRIVATE))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -98,5 +95,28 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun onRefresh(view: View) {
+        weatherViewModel.getFavouriteCity()
+    }
+
+    fun onMakeCityFavourite(view: View) {
+        val cityTextView = findViewById<TextView>(R.id.cityName)
+        weatherViewModel.setFavouriteCity(cityTextView.text.toString())
+
+        Snackbar.make(view, "Added", Snackbar.LENGTH_LONG)
+            .setAction("Action", null)
+            .setAnchorView(R.id.fab_favourite).show()
+
+
+    }
+
+    fun setRefreshBtnVisible(visible: Boolean) {
+        binding.appBarMain.fabRefresh.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    fun setFavouriteBtnVisible(visible: Boolean) {
+        binding.appBarMain.fabFavourite.visibility = if (visible) View.VISIBLE else View.GONE
     }
 }

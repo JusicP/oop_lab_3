@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                   xmlns:tools="http://schemas.android.com/tools"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:layout_margin="5dp"
+                                   app:cardBackgroundColor="@color/transparent_card"
+                                   app:cardCornerRadius="22dp"
+                                   app:cardElevation="0dp"
+                                   app:cardMaxElevation="0dp">
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/city_name"
+                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                tools:text="City"/>
+
+        <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.IconButton"
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:icon="@android:drawable/ic_delete"
+                app:iconGravity="textStart"
+                android:contentDescription="@string/add_weather"/>
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

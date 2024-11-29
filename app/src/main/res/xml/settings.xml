@@ -5,21 +5,11 @@
     <Preference
             app:title="@string/title_api_preferences"
             app:summary="@string/summary_api_preferences"
-            app:fragment="com.lab.weather.settings.SettingsActivity$BasicPreferencesFragment"/>
+            app:fragment="com.lab.weather.main.settings.SettingsActivity$BasicPreferencesFragment"/>
 
     <Preference
             app:title="@string/title_units_preferences"
             app:summary="@string/summary_units_preferences"
-            app:fragment="com.lab.weather.settings.SettingsActivity$UnitsPreferencesFragment"/>
-
-    <Preference
-            app:title="@string/dialogs"
-            app:summary="Sample preferences that launch dialogs"
-            app:fragment="com.lab.weather.settings.SettingsActivity$DialogPreferencesFragment"/>
-
-    <Preference
-            app:title="@string/advanced_attributes"
-            app:summary="Sample preferences with advanced attributes"
-            app:fragment="com.lab.weather.settings.SettingsActivity$AdvancedPreferencesFragment"/>
+            app:fragment="com.lab.weather.main.settings.SettingsActivity$UnitsPreferencesFragment"/>
 
 </PreferenceScreen>

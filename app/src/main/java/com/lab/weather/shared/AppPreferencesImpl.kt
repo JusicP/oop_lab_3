@@ -1,7 +1,7 @@
 package com.lab.weather.shared
 
 import android.content.SharedPreferences
-import java.util.Locale
+import java.util.*
 
 object AppPreferencesImpl : AppPreferences {
     private var sharedPreferences: SharedPreferences? = null
@@ -21,15 +21,41 @@ object AppPreferencesImpl : AppPreferences {
     override var weatherApiKey: String
         get() = sharedPreferences!!.getString("weatherApiKey", "").toString()
         set(value) {}
-    override var temperatureUnit: TemperatureMeasureUnit
-        get() = TemperatureMeasureUnit.valueOf(sharedPreferences!!.getString("temperatureUnit", TemperatureMeasureUnit.CELSIUS.toString()).toString())
-        set(value) {}
     override var unitsOfMeasurement: UnitsOfMeasurement
-        get() = UnitsOfMeasurement.valueOf(sharedPreferences!!.getString("unitsOfMeasurement", UnitsOfMeasurement.STANDARD.toString()).toString())
+        get() = UnitsOfMeasurement(
+                UnitsOfMeasurementSystem.valueOf(sharedPreferences!!.getString("unitsOfMeasurement", UnitsOfMeasurementSystem.STANDARD.toString()).toString()),
+                TemperatureMeasureUnit.valueOf(sharedPreferences!!.getString("temperatureUnit", TemperatureMeasureUnit.CELSIUS.toString()).toString()),
+                SpeedMeasureUnit.valueOf(sharedPreferences!!.getString("windSpeedUnit", SpeedMeasureUnit.KM_PER_HOUR.toString()).toString()),
+                PressureMeasureUnit.valueOf(sharedPreferences!!.getString("pressureUnit", PressureMeasureUnit.MILLIBAR.toString()).toString())
+        )
         set(value) {}
     override var locale: String
         get() = Locale.getDefault().language
         set(value) {}
+
+    override var favouriteCity: String?
+        get() {
+            return sharedPreferences!!.getString("favouriteCity", null)
+        }
+        set(value) {
+            val editor = sharedPreferences!!.edit()
+            editor.putString("favouriteCity", value)
+            editor.apply()
+        }
+
+    override var featuredCities: Set<String>
+        get() {
+            val set = sharedPreferences!!.getStringSet("featuredCities", null)
+            if (set == null) {
+                return emptySet<String>()
+            }
+            return set
+        }
+        set(value) {
+            val editor = sharedPreferences!!.edit()
+            editor.putStringSet("featuredCities", value)
+            editor.apply()
+        }
 
     override fun getCurrentApiKey(): String {
         if (weatherRepositoryType == WeatherRepositoryType.WEATHER_API) {

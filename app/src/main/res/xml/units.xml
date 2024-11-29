@@ -39,11 +39,19 @@
                 app:entryValues="@array/temperature_units_values"/>
 
         <DropDownPreference
-                app:key="windSpeedUnits"
+                app:key="windSpeedUnit"
                 app:title="@string/title_wind_speed_unit_preference"
                 app:useSimpleSummaryProvider="true"
                 app:entries="@array/wind_speed_units"
                 app:entryValues="@array/wind_speed_units_values"/>
+
+        <DropDownPreference
+                app:key="pressureUnit"
+                app:title="@string/title_pressure_unit_preference"
+                app:useSimpleSummaryProvider="true"
+                app:entries="@array/pressure_units"
+                app:entryValues="@array/pressure_units_values"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

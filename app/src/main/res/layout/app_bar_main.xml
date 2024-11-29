@@ -5,18 +5,22 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.MainActivity">
+        tools:context=".main.MainActivity"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/cloudy_weather_background">
 
     <com.google.android.material.appbar.AppBarLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:theme="@style/Theme.Weather.AppBarOverlay">
+            android:theme="@style/Theme.Weather.AppBarOverlay"
+            android:background="@null"
+            app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:background="?attr/colorPrimary"
                 app:popupTheme="@style/Theme.Weather.PopupOverlay"
+                android:background="@null"
                 android:layout_height="?attr/actionBarSize"/>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -31,13 +35,13 @@
             android:orientation="vertical"
             app:layout_dodgeInsetEdges="bottom">
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabAddWeather"
+                android:id="@+id/fab_favourite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_marginEnd="@dimen/fab_margin"
                 android:layout_marginBottom="16dp"
-                app:srcCompat="@android:drawable/ic_input_add" android:contentDescription="@string/add_weather"/>
+                app:srcCompat="@android:drawable/btn_star" android:contentDescription="@string/make_favourite"/>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_refresh"
                 android:layout_width="wrap_content"

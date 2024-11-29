@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="entries">
-        <item>Choose me!</item>
-        <item>No, me!</item>
-        <item>What about me?!</item>
-    </string-array>
-
-    <string-array name="entry_values">
-        <item>alpha</item>
-        <item>beta</item>
-        <item>charlie</item>
-    </string-array>
-
     <string-array name="weather_apis">
         <item>WeatherAPI</item>
         <item>OpenWeatherMap</item>
@@ -44,11 +32,20 @@
     </string-array>
 
     <string-array name="wind_speed_units">
-        <item>meter/sec</item>
+        <item>km/hour</item>
         <item>miles/hour</item>
     </string-array>
     <string-array name="wind_speed_units_values">
-        <item>MS</item>
-        <item>MH</item>
+        <item>KM_PER_HOUR</item>
+        <item>MILE_PER_HOUR</item>
+    </string-array>
+
+    <string-array name="pressure_units">
+        <item>Millibar</item>
+        <item>Inch</item>
+    </string-array>
+    <string-array name="pressure_units_values">
+        <item>MILLIBAR</item>
+        <item>INCH</item>
     </string-array>
 </resources>
